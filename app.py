@@ -153,6 +153,7 @@ def get_review_link(url):
 def index():
     sentiment_result = None
     pdf_filename = None
+    reviews_descriptions = []
     if request.method == 'POST':
         if 'file' not in request.files and 'url' not in request.form:
             return render_template('index.html', error='No file or URL provided')
@@ -206,6 +207,8 @@ def index():
             else:
                 sentiment_result = 'bad'
 
+            reviews_descriptions = df_reviews['Description'].tolist()
+
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file_path = os.path.join('uploads', filename)
@@ -230,7 +233,22 @@ def index():
 
             pdf_filename = None
 
-    return render_template('index.html', sentiment_result=sentiment_result, pdf_filename=pdf_filename)
+           
+
+    return render_template('index.html', sentiment_result=sentiment_result, pdf_filename=pdf_filename,  reviews_descriptions=reviews_descriptions)
+
+@app.route('/view-reviews')
+def view_reviews():
+    # Read the CSV file
+    df = pd.read_csv('reviews.csv')
+    # Convert the DataFrame to HTML
+    df_html = df.to_html()
+    return df_html
+
+
+@app.route('/download-reviews')
+def download_reviews():
+    return send_file('reviews.csv', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
