@@ -154,6 +154,7 @@ def index():
     sentiment_result = None
     pdf_filename = None
     reviews_descriptions = []
+    product_name = None
     if request.method == 'POST':
         if 'file' not in request.files and 'url' not in request.form:
             return render_template('index.html', error='No file or URL provided')
@@ -233,9 +234,12 @@ def index():
 
             pdf_filename = None
 
+        new_url_parts = pdf_url.split("/")
+        product_name = new_url_parts[3].replace("-"," ")
+
            
 
-    return render_template('index.html', sentiment_result=sentiment_result, pdf_filename=pdf_filename,  reviews_descriptions=reviews_descriptions)
+    return render_template('index.html', sentiment_result=sentiment_result, pdf_filename=pdf_filename,  reviews_descriptions=reviews_descriptions, product_name = product_name)
 
 @app.route('/view-reviews')
 def view_reviews():

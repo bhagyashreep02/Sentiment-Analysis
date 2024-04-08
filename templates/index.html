@@ -81,6 +81,16 @@
     </div>
     {% endif %}
 
+    <hr>
+    
+
+    {% if product_name %}
+    <div style="margin-top: 5rem;">
+        <h4>Product Name: {{product_name}}</h4>
+    </div>
+    {% endif %}
+
+
     {% if reviews_descriptions %}
         <!-- <h3 style="padding-top: 2rem;">Reviews Descriptions:</h3>
         <ol>
@@ -89,8 +99,8 @@
             {% endfor %}
         </ol> -->
         <div>
-            <a href="{{ url_for('view_reviews') }}" class="btn btn-primary">View Reviews</a>
-            <a href="{{ url_for('download_reviews') }}" class="btn btn-primary">Download Reviews</a>
+            <a href="{{ url_for('view_reviews') }}" class="btn btn-primary" style="margin-bottom: 5rem;">View Reviews</a>
+            <a href="{{ url_for('download_reviews') }}" class="btn btn-primary" style="margin-bottom: 5rem;">Download Reviews</a>
         </div>
     {% endif %}
 
