@@ -23,7 +23,7 @@ headers = {
     'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="102", "Google Chrome";v="102"',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'
 }
-len_page = 10
+len_page = 100
 
 # Load the sentiment analysis model and TF-IDF vectorizer
 with open('clf.pkl', 'rb') as f:
@@ -63,7 +63,7 @@ def reviewsHtml(url, len_page):
         params = {
             'ie': 'UTF8',
             'reviewerType': 'all_reviews',
-            'pageNumber': page_no
+            'pageNumber': page_no,
         }
         
         # Request make for each page

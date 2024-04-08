@@ -47,14 +47,15 @@
 
 <body>
 <div class="container mt-5">
-    <h1 class="mb-4">Sentiment Analysis</h1>
+    <h1 class="mb-4" style="padding-bottom: 1rem; padding-top: 2rem;">Analysis of Amazon Product reviews</h1>
+    <h4 class="mb-4" style="padding-bottom: 1rem;">Upload a PDF File of reviews if available else give an input of amazon product url</h4>
     <form method="POST" action="/" enctype="multipart/form-data">
-        <div class="form-group">
+        <div class="form-group" style="padding-bottom: 1rem;">
             <label for="file">Upload PDF file:</label>
             <input type="file" class="form-control-file" id="file" name="file">
         </div>
-        <div class="form-group">
-            <label for="url">Enter Amazon URL:</label>
+        <div class="form-group" style="padding-bottom: 1rem;">
+            <label for="url">Enter Amazon Product URL:</label>
             <input type="text" class="form-control" id="url" name="url">
         </div>
         <button type="submit" class="btn btn-primary">Analyze</button>
@@ -64,15 +65,16 @@
         <div class="alert alert-danger mt-4" role="alert">{{ error }}</div>
     {% endif %}
 
-    {% if sentiment is defined %}
-        <div class="mt-4">
-            {% if sentiment == 1 %}
-                <div class="alert alert-success" role="alert">Positive sentiment!</div>
-            {% else %}
-                <div class="alert alert-danger" role="alert">Negative sentiment!</div>
-            {% endif %}
-        </div>
+    {% if sentiment_result is defined %}
+    <div class="mt-4">
+        {% if sentiment_result == 'good' %}
+            <div class="alert alert-success" role="alert">It is reviewed as a GOOD product by majority of the people that have used it.</div>
+        {% elif sentiment_result == 'bad' %}
+            <div class="alert alert-danger" role="alert">It is reviewed as a BAD product by majority of the people that have used it.</div>
+        {% endif %}
+    </div>
     {% endif %}
+
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
